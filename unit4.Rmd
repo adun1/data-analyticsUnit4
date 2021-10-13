@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
 ```
 
 ## R Markdown
@@ -20,4 +21,8 @@ athleteData <- read.csv(file = "data/Athletes.csv")
 
 colnames(athleteData)
 head(athleteData)
+
+
+#ggplot2::ggplot(data = athleteData, mapping = aes(x = NOC)) + geom_histogram()
+ggplot(data = athleteData, mapping = aes(x = Discipline)) + geom_bar()
 ```
