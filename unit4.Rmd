@@ -1,47 +1,44 @@
 ---
 title: "mbaa531A4"
-author: "Brian M and Takashi B"
+author: 
+      - Brian McCormack
+      - Takashi Baba
 date: "12/10/2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
+pokemonData <- read.csv(file = "data/pokemon.csv")
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Pokemon HP Evaluation
 
 ```{r}
-# athleteData <- read.csv(file = "data/Athletes.csv")
-pokemonData <- read.csv(file = "data/pokemon.csv")
-
 #debugging
 colnames(pokemonData)
 head(pokemonData)
-
-# ggplot(data = pokemonData, mapping = aes(x = Defense, )) + geom_histogram()
-
-#histogram of hp
-ggplot(data = pokemonData, mapping = aes(x = HP, fill = Primary.Type)) + geom_histogram()
-
-#dot plot of hp according to pokemon type
-ggplot(data = pokemonData, mapping = aes(x = HP, group = Primary.Type, fill = Primary.Type, )) + geom_dotplot(binwidth = NULL) + facet_wrap(~Primary.Type)
-
-
-
-
-
-# colnames(athleteData)
-# head(athleteData)
-# 
-# sr <- order(athleteData, decreasing = FALSE)
-# #sr
-# 
-# #ggplot2::ggplot(data = athleteData, mapping = aes(x = NOC)) + geom_histogram()
-# ggplot(data = athleteData[sr,], mapping = aes(x = NOC), fill = Discipline) + geom_bar()
 ```
+
+### histogram of hp
+```{r}
+hpHist <- ggplot(data = pokemonData, mapping = aes(x = HP, fill = Primary.Type)) + geom_histogram()
+hpHist
+```
+
+### dot plot of hp according to pokemon type
+```{r}
+ggplot(data = pokemonData, mapping = aes(x = HP, group = Primary.Type, fill = Primary.Type, )) + geom_dotplot(binwidth = NULL) + facet_wrap(~Primary.Type)
+```
+
+### box plot of hp
+```{r}
+ggplot(data = pokemonData, mapping = aes(x = HP, y = 0)) + geom_jitter() + geom_boxplot(alpha  = .5)
+```
+
+### histogram with bar
+```{r}
+hpHist + geom_vline(mapping = aes(xintercept = mean(HP)), colour ='steel blue')
+```
+
