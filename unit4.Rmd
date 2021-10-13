@@ -17,12 +17,31 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
-athleteData <- read.csv(file = "data/Athletes.csv")
+# athleteData <- read.csv(file = "data/Athletes.csv")
+pokemonData <- read.csv(file = "data/pokemon.csv")
 
-colnames(athleteData)
-head(athleteData)
+#debugging
+colnames(pokemonData)
+head(pokemonData)
+
+# ggplot(data = pokemonData, mapping = aes(x = Defense, )) + geom_histogram()
+
+#histogram of hp
+ggplot(data = pokemonData, mapping = aes(x = HP, fill = Primary.Type)) + geom_histogram()
+
+#dot plot of hp according to pokemon type
+ggplot(data = pokemonData, mapping = aes(x = HP, group = Primary.Type, fill = Primary.Type, )) + geom_dotplot(binwidth = NULL) + facet_wrap(~Primary.Type)
 
 
-#ggplot2::ggplot(data = athleteData, mapping = aes(x = NOC)) + geom_histogram()
-ggplot(data = athleteData, mapping = aes(x = Discipline)) + geom_bar()
+
+
+
+# colnames(athleteData)
+# head(athleteData)
+# 
+# sr <- order(athleteData, decreasing = FALSE)
+# #sr
+# 
+# #ggplot2::ggplot(data = athleteData, mapping = aes(x = NOC)) + geom_histogram()
+# ggplot(data = athleteData[sr,], mapping = aes(x = NOC), fill = Discipline) + geom_bar()
 ```
