@@ -14,17 +14,20 @@ pokemonData <- read.csv(file = "data/pokemon.csv")
 ```
 
 ## Pokemon HP Evaluation
+### as shown below 
 
 ```{r}
 #debugging
 colnames(pokemonData)
 head(pokemonData)
 ```
+#### as shown above 
 
 ### histogram of hp
+#### The histogram below represents a bell shaped distribution of data. Furthermore, the different colours in the graph refer to the different pokemon types. As shown the graph is symmetrical around a median HP of `r median(pokemonData$HP)`, represented by a vertical dashed line. Also the mean of `r mean(pokemonData$HP)`, represented by a solid vertical line is very close to the median
 ```{r}
 hpHist <- ggplot(data = pokemonData, mapping = aes(x = HP, fill = Primary.Type)) + geom_histogram()
-hpHist
+hpHist + geom_vline(mapping = aes(xintercept = mean(HP)), colour ='black') + geom_vline(mapping = aes(xintercept = median(HP)), linetype ="dashed", colour = 'black')
 ```
 
 ### dot plot of hp according to pokemon type
@@ -33,12 +36,18 @@ ggplot(data = pokemonData, mapping = aes(x = HP, group = Primary.Type, fill = Pr
 ```
 
 ### box plot of hp
+#### as shown below the 2nd and 3rd quartile are similar distance from the mean therefore the box in the box plot is mostly symmetrical
 ```{r}
 ggplot(data = pokemonData, mapping = aes(x = HP, y = 0)) + geom_jitter() + geom_boxplot(alpha  = .5)
 ```
 
-### histogram with bar
+### averages
+#### as shown below the 73% of the points fall within one standard deviation, which is > 68% rule suggesting that the data is normally distributed
 ```{r}
-hpHist + geom_vline(mapping = aes(xintercept = mean(HP)), colour ='steel blue')
+m = median(pokemonData$HP)
+std = sd(pokemonData$HP)
+index <- (pokemonData$HP >= m - std & pokemonData$HP <= m + std)
+sum(index)/ length(index)
 ```
+
 
