@@ -15,7 +15,7 @@ pokemonData <- read.csv(file = "data/pokemon.csv")
 ```
 
 ### Final Determination of Study
-#### There is substantial evidence that the pokémon HP data is normally distributed. The four main supporting arguments suggesting that this data follows a normal distribution are arguments __1.1__, __1.2__, __1.3__, and __1.4__.
+#### There is substantial evidence that the pokémon HP data is normally distributed. The four main supporting arguments suggest that this data follows a normal distribution are arguments __1.1__, __1.2__, __1.3__, and __1.4__.
 ### 1.1 - Histogram of HP
 #### The histogram below represents a nornal (bell shaped) distribution of data. Furthermore, the different colours in the graph refer to the different Pokémon types. As shown the graph is symmetrical around a median HP of `r median(pokemonData$HP)`, represented by a vertical dashed line. Also the mean of `r mean(pokemonData$HP)`, represented by a solid vertical line is very close to the median
 ```{r}
