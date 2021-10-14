@@ -1,53 +1,53 @@
 ---
-title: "mbaa531A4"
+title: "MBAA 531 Test 4"
 author: 
-      - Brian McCormack
-      - Takashi Baba
+      - Brian McCormack, 568253728
+      - Takashi Baba, 658190905
 date: "12/10/2021"
 output: html_document
 ---
 
+### Setup
 ```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 pokemonData <- read.csv(file = "data/pokemon.csv")
 ```
 
-## Pokemon HP Evaluation
-### as shown below 
-
-```{r}
-#debugging
-colnames(pokemonData)
-head(pokemonData)
-```
-#### as shown above 
-
-### histogram of hp
-#### The histogram below represents a bell shaped distribution of data. Furthermore, the different colours in the graph refer to the different pokemon types. As shown the graph is symmetrical around a median HP of `r median(pokemonData$HP)`, represented by a vertical dashed line. Also the mean of `r mean(pokemonData$HP)`, represented by a solid vertical line is very close to the median
+### There is substantial evidence that the pokemon HP data is normally distributed. The four main supporting arguments suggesting that this data follows a normal distribution are arguments 1.1, 1.2, 1.3, and 1.4
+### 1.1 - Histogram of HP
+#### The histogram below represents a nornal (bell shaped) distribution of data. Furthermore, the different colours in the graph refer to the different pokemon types. As shown the graph is symmetrical around a median HP of `r median(pokemonData$HP)`, represented by a vertical dashed line. Also the mean of `r mean(pokemonData$HP)`, represented by a solid vertical line is very close to the median
 ```{r}
 hpHist <- ggplot(data = pokemonData, mapping = aes(x = HP, fill = Primary.Type)) + geom_histogram()
 hpHist + geom_vline(mapping = aes(xintercept = mean(HP)), colour ='black') + geom_vline(mapping = aes(xintercept = median(HP)), linetype ="dashed", colour = 'black')
 ```
 
-### dot plot of hp according to pokemon type
+### 1.2 - Dot Plot of HP According to Pokemon Type
+#### This dotplot shows that some pokemon types are more numerous than others. For instance Bug pokemon is numerous as the dots (cards) are distrubited in a normal fashion. In contrast, there are few flying pokemon. Therefore, there will be more variation in the flying pokemon due to a smaller dataset.
 ```{r}
 ggplot(data = pokemonData, mapping = aes(x = HP, group = Primary.Type, fill = Primary.Type, )) + geom_dotplot(binwidth = NULL) + facet_wrap(~Primary.Type)
 ```
 
-### box plot of hp
-#### as shown below the 2nd and 3rd quartile are similar distance from the mean therefore the box in the box plot is mostly symmetrical
+### 1.3 - Box Plot of HP
+#### As shown below the 2nd and 3rd quartile are a similar distance from the median therefore the box in the box plot is mostly symmetrical.
 ```{r}
 ggplot(data = pokemonData, mapping = aes(x = HP, y = 0)) + geom_jitter() + geom_boxplot(alpha  = .5)
 ```
 
-### averages
-#### as shown below the 73% of the points fall within one standard deviation, which is > 68% rule suggesting that the data is normally distributed
+### 1.4 - Normal Standard Deviation Rule
+#### As shown below 73% of the points fall within one standard deviation, which is > 68% rule. In addtion 97% of the points fall within two standard deviations which is close to the 95% rule. This further suggests that the data is normally distributed. 
 ```{r}
+#68 % rule
 m = median(pokemonData$HP)
 std = sd(pokemonData$HP)
 index <- (pokemonData$HP >= m - std & pokemonData$HP <= m + std)
-sum(index)/ length(index)
+pointsInSd <- sum(index)/ length(index)
+pointsInSd
+
+#95% rule
+index2 <- (pokemonData$HP >= m - 1.96*std & pokemonData$HP <= m + 1.96*std)
+pointsInSd2 <- sum(index2) / length(index2)
+pointsInSd2
 ```
 
 
