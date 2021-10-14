@@ -14,16 +14,17 @@ library(ggplot2)
 pokemonData <- read.csv(file = "data/pokemon.csv")
 ```
 
-### There is substantial evidence that the pokemon HP data is normally distributed. The four main supporting arguments suggesting that this data follows a normal distribution are arguments 1.1, 1.2, 1.3, and 1.4
+### Final Determination of Study
+#### There is substantial evidence that the pokémon HP data is normally distributed. The four main supporting arguments suggesting that this data follows a normal distribution are arguments __1.1__, __1.2__, __1.3__, and __1.4__.
 ### 1.1 - Histogram of HP
-#### The histogram below represents a nornal (bell shaped) distribution of data. Furthermore, the different colours in the graph refer to the different pokemon types. As shown the graph is symmetrical around a median HP of `r median(pokemonData$HP)`, represented by a vertical dashed line. Also the mean of `r mean(pokemonData$HP)`, represented by a solid vertical line is very close to the median
+#### The histogram below represents a nornal (bell shaped) distribution of data. Furthermore, the different colours in the graph refer to the different Pokémon types. As shown the graph is symmetrical around a median HP of `r median(pokemonData$HP)`, represented by a vertical dashed line. Also the mean of `r mean(pokemonData$HP)`, represented by a solid vertical line is very close to the median
 ```{r}
 hpHist <- ggplot(data = pokemonData, mapping = aes(x = HP, fill = Primary.Type)) + geom_histogram()
 hpHist + geom_vline(mapping = aes(xintercept = mean(HP)), colour ='black') + geom_vline(mapping = aes(xintercept = median(HP)), linetype ="dashed", colour = 'black')
 ```
 
-### 1.2 - Dot Plot of HP According to Pokemon Type
-#### This dotplot shows that some pokemon types are more numerous than others. For instance Bug pokemon is numerous as the dots (cards) are distrubited in a normal fashion. In contrast, there are few flying pokemon. Therefore, there will be more variation in the flying pokemon due to a smaller dataset.
+### 1.2 - Dot Plot of HP According to Pokémon Type
+#### This dotplot shows that some Pokémon types are more numerous than others. For instance Bug Pokémon is numerous as the dots (cards) are distributed in a normal fashion. In contrast, there are few flying Pokémon. Therefore, there will be more variation in the flying Pokémon due to a smaller dataset. Overall most pokemon types follow a normal distribution.
 ```{r}
 ggplot(data = pokemonData, mapping = aes(x = HP, group = Primary.Type, fill = Primary.Type, )) + geom_dotplot(binwidth = NULL) + facet_wrap(~Primary.Type)
 ```
