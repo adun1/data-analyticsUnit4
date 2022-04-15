@@ -1,8 +1,8 @@
 ---
-title: "MBAA 531 Test 4"
+title: "MBAA 531 Pokémon Project"
 author: 
-      - Brian McCormack, 568253728
-      - Takashi Baba, 658190905
+      - Brian McCormack
+      - Takashi Baba
 date: "12/10/2021"
 output: html_document
 ---
